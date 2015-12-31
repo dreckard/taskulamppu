@@ -5,14 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private Camera mCamera = null;
-    private Button mToggleBtn = null;
+    private ImageButton mToggleBtn = null;
     private SurfaceView mSurfaceView = null;
     private boolean mLampEnabled = false;
 
@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
             Camera.Parameters params = mCamera.getParameters();
             params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
             mCamera.setParameters(params);
+            mToggleBtn.setImageDrawable(getResources().getDrawable(R.drawable.lamp_on));
+            //mToggleBtn.setText(R.string.toggle_text_on);
         }
     }
     public void disableLamp() {
@@ -50,17 +52,17 @@ public class MainActivity extends AppCompatActivity {
             Camera.Parameters params = mCamera.getParameters();
             params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
             mCamera.setParameters(params);
+            mToggleBtn.setImageDrawable(getResources().getDrawable(R.drawable.lamp_off));
+            //mToggleBtn.setText(R.string.toggle_text_off);
         }
     }
     public void toggleLamp() {
         if (!mLampEnabled) {
             enableLamp();
-            mToggleBtn.setText(R.string.toggle_text_on);
             mLampEnabled = true;
         }
         else {
             disableLamp();
-            mToggleBtn.setText(R.string.toggle_text_off);
             mLampEnabled = false;
         }
     }
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         mSurfaceView = (SurfaceView) findViewById(R.id.surfaceView);
         mSurfaceView.setKeepScreenOn(true);
         mSurfaceView.setVisibility(SurfaceView.GONE);
-        mToggleBtn = (Button) findViewById(R.id.toggle_btn);
+        mToggleBtn = (ImageButton) findViewById(R.id.toggle_btn);
         mToggleBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click

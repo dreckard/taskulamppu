@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">taskulamppu_base</string>
+    <string name="toggle_text_off">Laittaa päälle</string>
+    <string name="toggle_text_on">Sammuttaa</string>
+</resources>
