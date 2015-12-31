@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">taskulamppu_base</string>
+    <string name="toggle_text_on">Turn off</string>
+    <string name="toggle_text_off">Turn on</string>
 </resources>
