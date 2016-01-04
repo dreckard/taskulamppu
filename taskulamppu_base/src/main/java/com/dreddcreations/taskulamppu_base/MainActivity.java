@@ -1,10 +1,12 @@
 package com.dreddcreations.taskulamppu_base;
 
+import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -15,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton mToggleBtn = null;
     private SurfaceView mSurfaceView = null;
     private boolean mLampEnabled = false;
+    private Drawable mLampOffDrawable = null;
+    private Drawable mLampOnDrawable = null;
 
     public boolean initCamera() {
         mCamera = Camera.open();
@@ -24,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             mCamera.release();
             mCamera = null;
-            Toast toast = Toast.makeText(getApplicationContext(), "Error: Failed to start camera preview", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.camera_not_available, Toast.LENGTH_LONG);
             toast.show();
             return false;
         }
@@ -43,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             Camera.Parameters params = mCamera.getParameters();
             params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
             mCamera.setParameters(params);
-            mToggleBtn.setImageDrawable(getResources().getDrawable(R.drawable.lamp_on));
+            mToggleBtn.setImageDrawable(mLampOnDrawable);
             //mToggleBtn.setText(R.string.toggle_text_on);
         }
     }
@@ -52,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             Camera.Parameters params = mCamera.getParameters();
             params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
             mCamera.setParameters(params);
-            mToggleBtn.setImageDrawable(getResources().getDrawable(R.drawable.lamp_off));
+            mToggleBtn.setImageDrawable(mLampOffDrawable);
             //mToggleBtn.setText(R.string.toggle_text_off);
         }
     }
@@ -76,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
             enableLamp();
         else
             disableLamp();
+
         //mCamera = Camera.open();
     }
 
@@ -91,9 +96,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mSurfaceView = (SurfaceView) findViewById(R.id.surfaceView);
-        mSurfaceView.setKeepScreenOn(true);
+        //mSurfaceView.setKeepScreenOn(true);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mSurfaceView.setVisibility(SurfaceView.GONE);
         mToggleBtn = (ImageButton) findViewById(R.id.toggle_btn);
+        mLampOffDrawable = getResources().getDrawable(R.drawable.lamp_off);
+        mLampOnDrawable = getResources().getDrawable(R.drawable.lamp_on);
         mToggleBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click

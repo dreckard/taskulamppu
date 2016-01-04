@@ -2,4 +2,5 @@
     <string name="app_name" translatable="false">taskulamppu_base</string>
     <string name="toggle_text_on">Turn off</string>
     <string name="toggle_text_off">Turn on</string>
+    <string name="camera_not_available">Failed to detect camera, does this device have one?</string>
 </resources>
