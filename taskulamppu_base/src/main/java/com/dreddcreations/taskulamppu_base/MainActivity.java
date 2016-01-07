@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Drawable mLampOffDrawable = null;
     private Drawable mLampOnDrawable = null;
 
-    public boolean initCamera() {
+    private boolean initCamera() {
         mCamera = Camera.open();
         try {
             mCamera.setPreviewDisplay(mSurfaceView.getHolder());
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-    public void closeCamera() {
+    private void closeCamera() {
         if ( mCamera != null )
         {
             mCamera.stopPreview();
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             mCamera = null;
         }
     }
-    public void enableLamp() {
+    private void enableLamp() {
         if ( mCamera != null ) {
             Camera.Parameters params = mCamera.getParameters();
             params.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             //mToggleBtn.setText(R.string.toggle_text_on);
         }
     }
-    public void disableLamp() {
+    private void disableLamp() {
         if ( mCamera != null ) {
             Camera.Parameters params = mCamera.getParameters();
             params.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             //mToggleBtn.setText(R.string.toggle_text_off);
         }
     }
-    public void toggleLamp() {
+    private void toggleLamp() {
         if (!mLampEnabled) {
             enableLamp();
             mLampEnabled = true;
